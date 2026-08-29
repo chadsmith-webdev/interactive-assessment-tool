@@ -1,0 +1,138 @@
+<!doctype html>
+<!--
+Author: Chad Smith
+Date: 2026-08-29
+File: index,html
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Readiness Assessment Tool</title>
+    <!-- External stylesheet link -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Main Container Layout -->
+    <main class="assessment-container">
+      <header class="assessment-header">
+        <h1>Business Readiness Assessment</h1>
+        <p>
+          Evaluate your operational baseline in under
+          <span class="accent">2 minutes</span>
+        </p>
+
+        <!-- Accessible Progress Tracker Component -->
+        <div
+          class="progress-wrapper"
+          role="progressbar"
+          aria-valuemin="1"
+          aria-valuemax="3"
+          aria-valuenow="1"
+        >
+          <div class="progress-bar" id="progressBar"></div>
+          <span class="progress-text" id="progessText">Step 1 of 3</span>
+        </div>
+      </header>
+
+      <!-- Dynamic Multi-Step Form Wrapper -->
+      <form id="assessmentForm" novalidate>
+        <!-- Step 1: Core Operation s-->
+        <section class="form-step active-step" id="step1" data-step="1">
+          <div class="step-content">
+            <h2>Step 1: Core Operations</h2>
+
+            <!-- Question 1 Block -->
+            <fieldset class="question-group">
+              <legend>
+                How do you currently track your internal project workflow?
+              </legend>
+              <label class="radio-option">
+                <input type="radio" name="q1" value="1" required />
+                <span
+                  >Manually (spreadsheets, sticky notes, or email threads)</span
+                >
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q1" value="2" />
+                <span
+                  >Fragmented (a mix of basic task managers across teams)</span
+                >
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q1" value="3" />
+                <span
+                  >Centralized (all tasks run through a single premium
+                  platform)</span
+                >
+              </label>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- Step 2: Lead Generation & Data -->
+        <section class="form-step hidden-step" id="step2" data-step="2">
+          <div class="step-content">
+            <h2>Step 2: Customer Pipeline</h2>
+
+            <!-- Question 2 Block -->
+            <fieldset class="question-group">
+              <legend>
+                How are new sales leads captured and followed up with?
+              </legend>
+              <label class="radio-option">
+                <input type="radio" name="q2" value="1" required />
+                <span>Reactive (we handle emails maually as they arrive)</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q2" value="2" />
+                <span
+                  >Semi-Automated (templates are sent, but timing varies)</span
+                >
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="q2" value="3" />
+                <span
+                  >Fully CRM-Integrated (instant tracking and automated
+                  follow-ups)</span
+                >
+              </label>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- Step 3: Results & Final Output Showcase -->
+        <section class="form-step hidden-step" id="step3" data-step="3">
+          <div class="step-content">
+            <h2>Step 3: Calculating Insights...</h2>
+
+            <!-- Placeholder Container for Dynamic JavaScript Evaluation Summary -->
+            <div id="resultDisplay" class="results-card hidden-element">
+              <h3>Your Performance Score</h3>
+              <div class="score-badge"><span id="scoreValue">0</span>%</div>
+              <p id="feedbackText">Calculating your business metrics...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sticky Structural Control Actions Panel -->
+        <footer class="form-controls">
+          <button
+            type="button"
+            id="prevBtn"
+            class="btn btn-secondary hidden-element"
+            disabled
+          >
+            Back
+          </button>
+          <button type="button" id="nextBtn" class="btn btn-primary">
+            Continue
+          </button>
+        </footer>
+      </form>
+    </main>
+
+    <!-- Project Logic Script Link -->
+    <script src="app.js"></script>
+  </body>
+</html>
