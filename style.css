@@ -1,0 +1,217 @@
+/*
+Author: Chad Smith
+Date: 2026-08-29
+File: style.css
+*/
+
+/* =======================================================================
+    1. RESET & VARIABLE ARCHITECTURE
+    =================================================================== */
+:root {
+  --bg-primary: #f8fafc;
+  --surface-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --color-primary: blue;
+  --color-primary-hover: rgba(0, 0, 255, 0.883);
+  --color-secondary: #e2e8f0;
+  --color-secondary-hover: #cbd5e1;
+  --border-radius: 12px;
+  --transition-speed: 0.25s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2%;
+}
+
+/* =======================================================================
+    2. MAIN CONTAINERS & STRUCTURAL CARD
+    =================================================================== */
+.assessment-container {
+  background-color: var(--surface-card);
+  width: 100%;
+  max-width: 600px;
+  border-radius: var(--border-radius);
+  padding: 3%;
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+.assessment-header {
+  margin-bottom: 32px;
+}
+
+.assessment-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.assessment-header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* =======================================================================
+    3. ACCESSIBLE PROGRESS BAR TRACKER
+    =================================================================== */
+.progress-wrapper {
+  margin-top: 24px;
+}
+
+.progress-wrapper .progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pseudo-element driving the active visual percentage indicator */
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 33.33%; /* Driven programmatically via JavaScript later */
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  transition: width var(--transition-speed) ease-in-out;
+}
+
+.progress-text {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* =======================================================================
+    4. FORM ELEMENTS & INTERACTIVE OPTIONS
+    =================================================================== */
+.question-group {
+  border: none;
+}
+
+.question-group legend {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-main);
+}
+
+/* Customized Custom Radio Layouts */
+.radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: var(--bg-primary);
+  border: 2px solid transparent;
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.radio-option:hover {
+  background-color: #f1f5f9;
+}
+
+/* Visual cue when input is native focused or checked */
+.radio-option:has(input:checked) {
+  border-color: var(--color-primary);
+  background-color: #eef2ff;
+}
+
+.radio-option input[type="radio"] {
+  margin-top: 5px;
+  accent-color: var(--color-primary);
+}
+
+/* =======================================================================
+    5. STEP STATE TOGGLES (THE CORE LOGIC)
+    =================================================================== */
+.form-step {
+  transition: opacity var(--transition-speed) ease;
+}
+
+/* Simple class architecture toggled by JavaScript to orchestrate shifts */
+.active-step {
+  display: block;
+  opacity: 1;
+}
+
+.hidden-step {
+  display: none;
+  opacity: 0;
+}
+
+/* =======================================================================
+    6. ACTIONS & CONTROLS FOOTER
+    =================================================================== */
+.form-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  border-top: 1px solid var(--color-secondary);
+  padding-top: 24px;
+}
+
+.btn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.tbn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Utility visibility helper */
+.hidden-element {
+  display: none !important;
+}
