@@ -71,10 +71,64 @@ function updateProgressbar() {
 }
 
 /* =============================================================================
-    4. EVENT BINDING LIFECYCLES
+    4. SCORE CALCULATION & EVALUATION ENGINE
+    ========================================================================= */
+function calculateResults() {
+  const formData = new FormData(form);
+  let totalScore = 0;
+  let questionsAnswered = 0;
+
+  // Iterate through form key/value pairs to accumulate scores
+  for (let [question, value] of formData.entries()) {
+    totalScore += parseInt(value, 10);
+    questionsAnswered++;
+  }
+
+  // Maximum possible score (3 points per question * 2 graded questions)
+  const maxScore = questionsAnswered * 3;
+
+  // Safety check to prevent dividing by zero if data is missing
+  const scorePercentage =
+    maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
+
+  // Render results view components
+  renderEvaluation(scorePercentage);
+}
+
+function renderEvaluation(score) {
+  const resultsDisplay = document.getElementById("resultsDisplay");
+  const scoreValue = document.getElementById("scoreValue");
+  const feedbackText = document.getElementById("feedbackText");
+
+  // Update visual percentage integer counter
+  scoreValue.textContent = score;
+
+  // Dynamically inject conditional text strings based on mathematical tier metrics
+  if (score >= 85) {
+    feedbackText.textContent =
+      "Excellent optimization! Your workflows are streamlined, automated, and ready for high-velocity operations. Focus on minor scaling refinements.";
+  } else if (score >= 50) {
+    feedbackText.textContent =
+      "Good foundation, but clear bottleneck vulnerabilities exist. Your processes are partially automated, but manually jumping apps is limiting your production scaling.";
+  } else {
+    feedbackText.textContent =
+      "High operational risk detected. Heavy reliance on manual spreadsheets, decentralized emails, or disjointed tracking creates critical business blind spots. Automation upgrades recommended.";
+  }
+
+  // Reveal result layout metrics container card
+  resultsDisplay.classList.remove("hidden-element");
+}
+
+/* =============================================================================
+    5. REVISED EVENT BINDING LIFECYCLES
     ========================================================================= */
 nextBtn.addEventListener("click", () => {
-  // Basic structural safety check before step advancement
+  // Determine if the current step requires active score processing
+  // Since Step 2 is the final question view before Step 3 (Results);
+  if (currentStep === 2) {
+    calculateResults();
+  }
+
   if (currentStep < totalSteps) {
     currentStep++;
     updateStepVisibility();
